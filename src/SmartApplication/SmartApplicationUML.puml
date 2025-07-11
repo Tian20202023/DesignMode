@@ -1,0 +1,158 @@
+@startuml
+class SmartApplication.HuaweiAirConditioner {
++ String getDescription()
+}
+
+interface SmartApplication.SmartLight {
+~ SmartLight clone()
+}
+
+class SmartApplication.XiaomiAirConditioner {
++ String getDescription()
+}
+
+class SmartApplication.SmartSpeaker {
+- String WiFiModule
+- String VoiceAssistant
+- String AudioQuality
++ String getDescription()
++ String getWiFiModule()
++ void setWiFiModule(String)
++ String getVoiceAssistant()
++ void setVoiceAssistant(String)
++ String getAudioQuality()
++ void setAudioQuality(String)
+}
+
+
+interface SmartApplication.DeviceFactory {
+~ SmartLight createSmartLight()
+~ SmartAirConditioner createSmartAirConditioner()
+~ SmartSpeaker createSmartSpeaker()
+}
+
+class SmartApplication.PhilipsLight {
++ String getDescription()
++ SmartLight clone()
+}
+
+abstract class SmartApplication.SmartSpeakerBuilder {
+# SmartSpeaker smartSpeaker
++ {abstract}void buildWiFiModule()
++ {abstract}void buildAudioQuality()
++ {abstract}void buildVoiceAssistant()
++ SmartSpeaker getSmartSpeaker()
+}
+
+
+class SmartApplication.HuaweiSpeakerBuilder {
++ void buildWiFiModule()
++ void buildAudioQuality()
++ void buildVoiceAssistant()
+}
+
+class SmartApplication.SmartHomeApp {
++ {static} void main(String[])
+- {static} DeviceFactory getFactoryByVendor(Vendor)
+}
+
+class SmartApplication.HuaweiFactory {
++ SmartLight createSmartLight()
++ SmartAirConditioner createSmartAirConditioner()
++ SmartSpeaker createSmartSpeaker()
+}
+
+class SmartApplication.XiaomiLight {
++ String getDescription()
++ SmartLight clone()
+}
+
+class SmartApplication.HuaweiLight {
++ String getDescription()
++ SmartLight clone()
+}
+
+class SmartApplication.XiaomiFactory {
++ SmartLight createSmartLight()
++ SmartAirConditioner createSmartAirConditioner()
++ SmartSpeaker createSmartSpeaker()
+}
+
+class SmartApplication.PhilipsAirConditioner {
++ String getDescription()
+}
+
+interface SmartApplication.SmartAirConditioner {
+}
+class SmartApplication.Director {
+- SmartSpeakerBuilder ssb
++ void setSmartSpeakerBuilder(SmartSpeakerBuilder)
++ SmartSpeaker construct()
+}
+
+
+class SmartApplication.PhilipsFactory {
++ SmartLight createSmartLight()
++ SmartAirConditioner createSmartAirConditioner()
++ SmartSpeaker createSmartSpeaker()
+}
+
+class SmartApplication.PhilipsSpeakerBuilder {
++ void buildWiFiModule()
++ void buildAudioQuality()
++ void buildVoiceAssistant()
+}
+
+enum SmartApplication.Vendor {
++  HUAWEI
++  XIAOMI
++  PHILIPS
+}
+
+class SmartApplication.DeviceManager {
+- {static} DeviceManager instance
+- List<SmartDevice> devices
++ {static} DeviceManager getInstance()
++ void register(SmartDevice)
++ void showAllDevices()
++ int getDeviceCount()
+}
+
+
+interface SmartApplication.SmartDevice {
+~ String getDescription()
+}
+
+enum SmartApplication.DeviceType {
++  LIGHT
++  AIR_CONDITIONER
++  SPEAKER
+}
+
+class SmartApplication.XiaomiSpeakerBuilder {
++ void buildWiFiModule()
++ void buildAudioQuality()
++ void buildVoiceAssistant()
+}
+
+
+
+SmartApplication.SmartAirConditioner <|.. SmartApplication.HuaweiAirConditioner
+SmartApplication.SmartDevice <|-- SmartApplication.SmartLight
+SmartApplication.SmartAirConditioner <|.. SmartApplication.XiaomiAirConditioner
+SmartApplication.SmartDevice <|.. SmartApplication.SmartSpeaker
+SmartApplication.SmartLight <|.. SmartApplication.PhilipsLight
+SmartApplication.Cloneable <|.. SmartApplication.PhilipsLight
+SmartApplication.SmartSpeakerBuilder <|-- SmartApplication.HuaweiSpeakerBuilder
+SmartApplication.DeviceFactory <|.. SmartApplication.HuaweiFactory
+SmartApplication.SmartLight <|.. SmartApplication.XiaomiLight
+SmartApplication.Cloneable <|.. SmartApplication.XiaomiLight
+SmartApplication.SmartLight <|.. SmartApplication.HuaweiLight
+SmartApplication.Cloneable <|.. SmartApplication.HuaweiLight
+SmartApplication.DeviceFactory <|.. SmartApplication.XiaomiFactory
+SmartApplication.SmartAirConditioner <|.. SmartApplication.PhilipsAirConditioner
+SmartApplication.SmartDevice <|-- SmartApplication.SmartAirConditioner
+SmartApplication.DeviceFactory <|.. SmartApplication.PhilipsFactory
+SmartApplication.SmartSpeakerBuilder <|-- SmartApplication.PhilipsSpeakerBuilder
+SmartApplication.SmartSpeakerBuilder <|-- SmartApplication.XiaomiSpeakerBuilder
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class Singleton.ConfigManager {
+- {static} ConfigManager instance
+- Map<String,String> configMap
++ {static} ConfigManager getInstance()
+- void load()
++ String get(String)
+}
+
+
+class Singleton.Client {
++ {static} void main(String[])
+}
+
+@enduml

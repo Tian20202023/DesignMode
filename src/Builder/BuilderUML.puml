@@ -1,0 +1,63 @@
+@startuml
+class Builder.Client {
++ {static} void main(String[])
+}
+
+class Builder.ServerBuilder {
++ void buildCPU()
++ void buildMemory()
++ void buildHardDisk()
++ void buildMainUnit()
++ void buildDisplay()
+}
+
+class Builder.Director {
+- ComputerBuilder cb
++ void setComputer(ComputerBuilder)
++ Computer construct(ComputerBuilder)
+}
+
+
+class Builder.LaptopBuilder {
++ void buildCPU()
++ void buildMemory()
++ void buildHardDisk()
++ void buildMainUnit()
++ void buildDisplay()
+}
+
+abstract class Builder.ComputerBuilder {
+~ Computer computer
+~ {abstract}void buildCPU()
+~ {abstract}void buildMemory()
+~ {abstract}void buildHardDisk()
+~ {abstract}void buildMainUnit()
+~ {abstract}void buildDisplay()
++ Computer getComputer()
+}
+
+
+class Builder.Computer {
+- String CPU
+- String Memory
+- String HardDisk
+- String MainUnit
+- String Display
++ String getCPU()
++ void setCPU(String)
++ String getMemory()
++ void setMemory(String)
++ String getHardDisk()
++ void setHardDisk(String)
++ String getMainUnit()
++ void setMainUnit(String)
++ String getDisplay()
++ void setDisplay(String)
+}
+
+
+
+
+Builder.ComputerBuilder <|-- Builder.ServerBuilder
+Builder.ComputerBuilder <|-- Builder.LaptopBuilder
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+interface AbstractFactory.TextField {
+~ void render()
+}
+
+class AbstractFactory.Client {
++ {static} void main(String[])
+}
+
+class AbstractFactory.WindowsTextField {
++ void render()
+}
+
+class AbstractFactory.MacTextField {
++ void render()
+}
+
+abstract class AbstractFactory.GUIFactory {
++ {abstract}Button createButton()
++ {abstract}TextField createTextField()
+}
+
+class AbstractFactory.WindowsFactory {
++ Button createButton()
++ TextField createTextField()
+}
+
+class AbstractFactory.WindowsButton {
++ void render()
+}
+
+interface AbstractFactory.Button {
+~ void render()
+}
+
+class AbstractFactory.MacButton {
++ void render()
+}
+
+class AbstractFactory.MacFactory {
++ Button createButton()
++ TextField createTextField()
+}
+
+
+
+AbstractFactory.TextField <|.. AbstractFactory.WindowsTextField
+AbstractFactory.TextField <|.. AbstractFactory.MacTextField
+AbstractFactory.GUIFactory <|-- AbstractFactory.WindowsFactory
+AbstractFactory.Button <|.. AbstractFactory.WindowsButton
+AbstractFactory.Button <|.. AbstractFactory.MacButton
+AbstractFactory.GUIFactory <|-- AbstractFactory.MacFactory
+@enduml

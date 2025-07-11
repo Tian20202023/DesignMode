@@ -1,0 +1,25 @@
+@startuml
+class Prototype.Attachment {
++ void download()
+}
+
+class Prototype.WeeklyLog {
++ String name
++ String date
++ String content
+- Attachment attachment
++ Attachment getAttachment()
++ Object deepClone()
+}
+
+
+class Prototype.Client {
++ {static} void main(String[])
+}
+
+
+
+java.io.Serializable <|.. Prototype.Attachment
+Prototype.Serializable <|.. Prototype.WeeklyLog
+java.io.Serializable <|.. Prototype.Client
+@enduml
