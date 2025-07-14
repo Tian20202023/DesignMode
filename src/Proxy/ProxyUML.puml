@@ -1,0 +1,27 @@
+@startuml
+interface Proxy.Internet {
+~ void connectTo(String)
+}
+
+class Proxy.Client {
++ {static} void main(String[])
+}
+
+class Proxy.ProxyInternet {
+- RealInternet realInternet
++ List<String> list
++ void connectTo(String)
+}
+
+
+class Proxy.RealInternet {
++ void connectTo(String)
+}
+
+
+
+Proxy.Internet <|.. Proxy.ProxyInternet
+Proxy.Internet <|.. Proxy.RealInternet
+Proxy.RealInternet <--Proxy.ProxyInternet
+
+@enduml

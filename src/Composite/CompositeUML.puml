@@ -1,0 +1,28 @@
+@startuml
+class Composite.Directory {
+- ArrayList list
++ void add(FileSystemNode)
++ void delete(FileSystemNode)
++ void display()
+}
+
+
+class Composite.File {
++ void display()
+}
+
+abstract class Composite.FileSystemNode {
++ String name
++ {abstract}void display()
+}
+
+
+class Composite.Client {
++ {static} void main(String[])
+}
+
+
+
+Composite.FileSystemNode <|-- Composite.Directory
+Composite.FileSystemNode <|-- Composite.File
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+abstract class Flyweight.ChessPiece {
++ {abstract}void display(int,int)
+}
+
+class Flyweight.BlackChessPiece {
++ void display(int,int)
+}
+
+class Flyweight.WhiteChessPiece {
++ void display(int,int)
+}
+
+class Flyweight.ChessFactory {
+- {static} Map<String,ChessPiece> cache
++ {static} ChessPiece getChessPiece(String)
+}
+
+
+class Flyweight.Client {
++ {static} void main(String[])
+}
+
+
+Flyweight.ChessFactory o--> Flyweight.ChessPiece
+Flyweight.ChessPiece <|-- Flyweight.BlackChessPiece
+Flyweight.ChessPiece <|-- Flyweight.WhiteChessPiece
+@enduml

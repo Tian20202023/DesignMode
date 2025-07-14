@@ -1,0 +1,23 @@
+@startuml
+class Adapter.Client {
++ {static} void main(String[])
+}
+
+interface Adapter.Power5V {
++ void output5V()
+}
+
+class Adapter.PowerSource220V {
++ void output220V()
++ void change()
+}
+
+class Adapter.VoltageAdapter {
++ void output5V()
+}
+
+
+
+Adapter.Power5V <|.. Adapter.VoltageAdapter
+Adapter.PowerSource220V <|-- Adapter.VoltageAdapter
+@enduml

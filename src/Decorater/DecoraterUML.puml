@@ -1,0 +1,46 @@
+@startuml
+class Decorater.Client {
++ {static} void main(String[])
+}
+
+class Decorater.Coffee {
++ String getDescription()
++ int getCost()
+}
+
+abstract class Decorater.Beverage {
++ {abstract}String getDescription()
++ {abstract}int getCost()
+}
+
+class Decorater.SugarDecorator {
++ String getDescription()
++ int getCost()
+}
+
+class Decorater.MilkDecorator {
++ String getDescription()
++ int getCost()
+}
+
+abstract class Decorater.BeverageDecorator {
+# Beverage beverage
++ String getDescription()
++ int getCost()
+}
+
+
+class Decorater.Tea {
++ String getDescription()
++ int getCost()
+}
+
+
+
+Decorater.Beverage <|-- Decorater.Coffee
+Decorater.BeverageDecorator <|-- Decorater.SugarDecorator
+Decorater.BeverageDecorator <|-- Decorater.MilkDecorator
+Decorater.Beverage <|-- Decorater.BeverageDecorator
+Decorater.Beverage <|-- Decorater.Tea
+Decorater.BeverageDecorator o--> Decorater.Beverage
+@enduml
