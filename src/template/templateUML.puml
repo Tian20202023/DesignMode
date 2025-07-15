@@ -1,0 +1,32 @@
+@startuml
+class template.ProductDataImporter {
++ void readFile()
++ void parseData()
++ void validateData()
++ void saveData()
+}
+
+abstract class template.DataImporter {
++ void importData()
++ {abstract}void readFile()
++ {abstract}void parseData()
++ {abstract}void validateData()
++ {abstract}void saveData()
+}
+
+class template.Client {
++ {static} void main(String[])
+}
+
+class template.UserDataImporter {
++ void readFile()
++ void parseData()
++ void validateData()
++ void saveData()
+}
+
+
+
+template.DataImporter <|-- template.ProductDataImporter
+template.DataImporter <|-- template.UserDataImporter
+@enduml

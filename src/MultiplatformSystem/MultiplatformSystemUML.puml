@@ -1,0 +1,90 @@
+@startuml
+class MultiplatformSystem.MP3 {
++ void play(String)
++ String getName(String)
+}
+
+class MultiplatformSystem.MP4 {
++ void play(String)
++ String getName(String)
+}
+
+abstract class MultiplatformSystem.Media {
+# Platform platform
++ {abstract}void play(String)
+}
+
+
+class MultiplatformSystem.WindowsPlatform {
++ String decode(String)
+}
+
+class MultiplatformSystem.MediaProxy {
+- Media realMedia
+- String user
++ void play(String)
+}
+
+
+class MultiplatformSystem.LinuxPlatform {
++ String decode(String)
+}
+
+class MultiplatformSystem.SpeedDecorator {
++ void play(String)
+}
+
+class MultiplatformSystem.MediaPlayerFacade {
++ void playMedia(Media,String)
+}
+
+abstract class MultiplatformSystem.MediaDecorator {
+# Media media
++ void play(String)
+}
+
+
+class MultiplatformSystem.Playlist {
+- ArrayList<Media> items
++ void addItem(Media)
++ void removeItem(Media)
++ void play(String)
+}
+
+
+class MultiplatformSystem.SubtitleDecorator {
++ void play(String)
+}
+
+class MultiplatformSystem.AviAdapter {
+# MP4 mp4
++ void play(String)
+}
+
+
+class MultiplatformSystem.EffectDecorator {
++ void play(String)
+}
+
+class MultiplatformSystem.Client {
++ {static} void main(String[])
+}
+
+interface MultiplatformSystem.Platform {
+~ String decode(String)
+}
+
+MultiplatformSystem.Media --> MultiplatformSystem.Platform
+MultiplatformSystem.MediaPlayerFacade ...> MultiplatformSystem.Media
+MultiplatformSystem.Media <|-- MultiplatformSystem.MP3
+MultiplatformSystem.Media <|-- MultiplatformSystem.MP4
+MultiplatformSystem.Platform <|.. MultiplatformSystem.WindowsPlatform
+MultiplatformSystem.Media <|-- MultiplatformSystem.MediaProxy
+MultiplatformSystem.Platform <|.. MultiplatformSystem.LinuxPlatform
+MultiplatformSystem.MediaDecorator <|-- MultiplatformSystem.SpeedDecorator
+MultiplatformSystem.Media <|-- MultiplatformSystem.MediaDecorator
+MultiplatformSystem.Media <|-- MultiplatformSystem.Playlist
+MultiplatformSystem.MediaDecorator <|-- MultiplatformSystem.SubtitleDecorator
+MultiplatformSystem.Media <|-- MultiplatformSystem.AviAdapter
+MultiplatformSystem.MediaDecorator <|-- MultiplatformSystem.EffectDecorator
+@enduml

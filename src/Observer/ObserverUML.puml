@@ -1,0 +1,35 @@
+@startuml
+class Observer.WeatherData {
++ void notifyObservers(float,float,float)
+}
+
+class Observer.PhoneDisplay {
++ void update(float,float,float)
+}
+
+class Observer.Client {
++ {static} void main(String[])
+}
+
+abstract class Observer.Subject {
+# ArrayList<Observer> observers
++ void registerObserver(Observer)
++ void removeObserver(Observer)
++ {abstract}void notifyObservers(float,float,float)
+}
+
+
+interface Observer.Observer {
+~ void update(float,float,float)
+}
+
+class Observer.TVDisplay {
++ void update(float,float,float)
+}
+
+
+Observer.Subject --> Observer.Observer
+Observer.Subject <|-- Observer.WeatherData
+Observer.Observer <|.. Observer.PhoneDisplay
+Observer.Observer <|.. Observer.TVDisplay
+@enduml
