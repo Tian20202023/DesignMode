@@ -1,0 +1,47 @@
+@startuml
+class visitor.ImageFile {
++ void accept(FileVisitor)
+}
+
+interface visitor.FileVisitor {
++ void visit(VideoFile)
++ void visit(ImageFile)
++ void visit(AudioFile)
+}
+
+class visitor.VirusScannerVisitor {
++ void visit(ImageFile)
++ void visit(AudioFile)
++ void visit(VideoFile)
+}
+
+class visitor.VideoFile {
++ void accept(FileVisitor)
+}
+
+class visitor.DisplayVisitor {
++ void visit(ImageFile)
++ void visit(VideoFile)
++ void visit(AudioFile)
+}
+
+class visitor.AudioFile {
++ void accept(FileVisitor)
+}
+
+interface visitor.AbstractFile {
+~ void accept(FileVisitor)
+}
+
+class visitor.Client {
++ {static} void main(String[])
+}
+
+
+
+visitor.AbstractFile <|.. visitor.ImageFile
+visitor.FileVisitor <|.. visitor.VirusScannerVisitor
+visitor.AbstractFile <|.. visitor.VideoFile
+visitor.FileVisitor <|.. visitor.DisplayVisitor
+visitor.AbstractFile <|.. visitor.AudioFile
+@enduml
