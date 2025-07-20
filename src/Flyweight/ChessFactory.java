@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ChessFactory {
     private static final Map<String, ChessPiece> cache = new HashMap<>();
-
+    //黑子白子为内部状态，可以共享
     public static ChessPiece getChessPiece(String color) {
         ChessPiece piece = cache.get(color);
         if (piece == null) {

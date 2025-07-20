@@ -1,0 +1,171 @@
+@startuml
+interface SmartHomeControl.Handler {
+~ void setNext(Handler)
+~ boolean handle(String)
+}
+
+class SmartHomeControl.EnergySavingStrategy {
++ void execute()
+}
+
+class SmartHomeControl.AirConditionerOpenCommand {
+- AirConditioner ac
++ void execute()
++ void undo()
+}
+
+
+class SmartHomeControl.FastResponseStrategy {
++ void execute()
+}
+
+class SmartHomeControl.Client {
++ {static} void main(String[])
+}
+
+interface SmartHomeControl.Observer {
+~ void update(double)
+}
+
+class SmartHomeControl.CurtainHandler {
+- Handler nextHandler
+- Curtain curtain
++ void setNext(Handler)
++ boolean handle(String)
+}
+
+
+interface SmartHomeControl.Subject {
+~ void registerObserver(Observer)
+~ void removeObserver(Observer)
+~ void notifyObservers()
+}
+
+class SmartHomeControl.TemperatureSensor {
+- List<Observer> observers
+- double temperature
++ void setTemperature(double)
++ void registerObserver(Observer)
++ void removeObserver(Observer)
++ void notifyObservers()
+}
+
+
+interface SmartHomeControl.DeviceState {
+~ void turnOn(SmartDevice)
+~ void turnOff(SmartDevice)
+}
+
+interface SmartHomeControl.DeviceStrategy {
+~ void execute()
+}
+
+abstract class SmartHomeControl.SmartDevice {
+# DeviceState state
+# String name
++ void setState(DeviceState)
++ DeviceState getState()
++ String getName()
++ void turnOn()
++ void turnOff()
++ void startup()
+# {abstract}void check()
+# {abstract}void powerOn()
+# {abstract}void startFan()
+}
+
+
+class SmartHomeControl.ACHandler {
+- Handler nextHandler
+- AirConditioner ac
++ void setNext(Handler)
++ boolean handle(String)
+}
+
+
+class SmartHomeControl.VoiceHandler {
+- Handler nextHandler
++ void setNext(Handler)
++ boolean handle(String)
+}
+
+
+class SmartHomeControl.OnState {
++ void turnOn(SmartDevice)
++ void turnOff(SmartDevice)
+}
+
+class SmartHomeControl.AirConditioner {
+- DeviceStrategy strategy
++ void update(double)
+# void check()
+# void powerOn()
+# void startFan()
++ void setStrategy(DeviceStrategy)
++ void run()
+}
+
+
+class SmartHomeControl.Light {
+# void check()
+# void powerOn()
+# void startFan()
+}
+
+interface SmartHomeControl.Command {
+~ void execute()
+~ void undo()
+}
+
+class SmartHomeControl.LightOnCommand {
+- Light light
++ void execute()
++ void undo()
+}
+
+
+class SmartHomeControl.OffState {
++ void turnOn(SmartDevice)
++ void turnOff(SmartDevice)
+}
+
+class SmartHomeControl.CurtainOpenCommand {
+- Curtain curtain
++ void execute()
++ void undo()
+}
+
+
+class SmartHomeControl.Curtain {
+# void check()
+# void powerOn()
+# void startFan()
+}
+
+class SmartHomeControl.RemoteControl {
+- Command lastCommand
++ void pressButton(Command)
++ void pressUndo()
+}
+
+
+SmartHomeControl.AirConditioner <-- SmartHomeControl.AirConditionerOpenCommand
+SmartHomeControl.Light <-- SmartHomeControl.LightOnCommand
+SmartHomeControl.Curtain <-- SmartHomeControl.CurtainOpenCommand
+SmartHomeControl.RemoteControl --> SmartHomeControl.Command
+SmartHomeControl.DeviceStrategy <|.. SmartHomeControl.EnergySavingStrategy
+SmartHomeControl.Command <|.. SmartHomeControl.AirConditionerOpenCommand
+SmartHomeControl.DeviceStrategy <|.. SmartHomeControl.FastResponseStrategy
+SmartHomeControl.Handler <|.. SmartHomeControl.CurtainHandler
+SmartHomeControl.Subject <|.. SmartHomeControl.TemperatureSensor
+SmartHomeControl.Handler <|.. SmartHomeControl.ACHandler
+SmartHomeControl.Handler <|.. SmartHomeControl.VoiceHandler
+SmartHomeControl.DeviceState <|.. SmartHomeControl.OnState
+SmartHomeControl.Observer <|.. SmartHomeControl.AirConditioner
+SmartHomeControl.SmartDevice <|-- SmartHomeControl.AirConditioner
+SmartHomeControl.SmartDevice <|-- SmartHomeControl.Light
+SmartHomeControl.Command <|.. SmartHomeControl.LightOnCommand
+SmartHomeControl.DeviceState <|.. SmartHomeControl.OffState
+SmartHomeControl.Command <|.. SmartHomeControl.CurtainOpenCommand
+SmartHomeControl.SmartDevice <|-- SmartHomeControl.Curtain
+@enduml

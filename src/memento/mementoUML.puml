@@ -1,0 +1,30 @@
+@startuml
+class memento.Editor {
+- String text
++ void setText(String)
++ String getText()
++ EditorMemento save()
++ void restore(EditorMemento)
+}
+
+
+class memento.Client {
++ {static} void main(String[])
+}
+
+class memento.EditorHistory {
+- Stack<EditorMemento> history
++ void push(EditorMemento)
++ EditorMemento pop()
++ boolean hasHistory()
+}
+
+
+class memento.EditorMemento {
+- String text
++ String getText()
+}
+
+memento.EditorHistory --> memento.EditorMemento
+memento.Editor ...> memento.EditorMemento
+@enduml

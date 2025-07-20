@@ -12,4 +12,8 @@ public class MP4 extends Media{
     public String getName(String fileName) {
         return fileName+".mp4";
     }
+
+    public void playAvi(String fileName){
+        System.out.print("播放媒体："+fileName);
+    }
 }

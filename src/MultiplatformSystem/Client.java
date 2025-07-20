@@ -18,7 +18,6 @@ public class Client {
         Media aviMedia = new AviAdapter(new MP4(windows));
         // 创建播放列表
         Playlist playlist = new Playlist();
-        playlist.addItem(new MP3(windows));
         playlist.addItem(aviMedia);
 
         // 使用代理

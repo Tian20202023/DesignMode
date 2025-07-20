@@ -5,7 +5,7 @@ public class Director {
     public void setComputer(ComputerBuilder cb){
         this.cb=cb;
     }
-    public Computer construct(ComputerBuilder cb){
+    public Computer construct(){
         cb.buildCPU();
         cb.buildMemory();
         cb.buildHardDisk();

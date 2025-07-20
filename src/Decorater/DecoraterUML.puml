@@ -42,5 +42,5 @@ Decorater.BeverageDecorator <|-- Decorater.SugarDecorator
 Decorater.BeverageDecorator <|-- Decorater.MilkDecorator
 Decorater.Beverage <|-- Decorater.BeverageDecorator
 Decorater.Beverage <|-- Decorater.Tea
-Decorater.BeverageDecorator o--> Decorater.Beverage
+Decorater.BeverageDecorator o-- Decorater.Beverage
 @enduml

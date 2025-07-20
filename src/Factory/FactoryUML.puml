@@ -1,0 +1,36 @@
+@startuml
+interface Factory.ImageReader {
+~ void read()
+}
+
+class Factory.Client {
++ {static} void main(String[])
+}
+
+class Factory.JpgReaderFactory {
++ ImageReader createReader()
+}
+
+class Factory.JpgReader {
++ void read()
+}
+
+interface Factory.ImageReaderFactory {
+~ ImageReader createReader()
+}
+
+class Factory.GifReader {
++ void read()
+}
+
+class Factory.GifReaderFactory {
++ ImageReader createReader()
+}
+
+
+
+Factory.ImageReaderFactory <|.. Factory.JpgReaderFactory
+Factory.ImageReader <|.. Factory.JpgReader
+Factory.ImageReader <|.. Factory.GifReader
+Factory.ImageReaderFactory <|.. Factory.GifReaderFactory
+@enduml

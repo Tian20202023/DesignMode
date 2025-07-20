@@ -1,6 +1,7 @@
 package Facade;
 
 public class HomeFacade {
+    //管理子系统
     private AirConditioner airConditioner;
     private Light light;
     private SecuritySystem securitySystem;

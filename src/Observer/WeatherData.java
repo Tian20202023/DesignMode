@@ -5,11 +5,7 @@ public class WeatherData extends Subject {
 
         for (Observer obs : observers) {
             if (obs != null) {
-                try {
-                    obs.update(temp,humidity,pressure);
-                } catch (Exception e) {
-                    System.err.println("观察者响应失败: " + e.getMessage());
-                }
+                obs.update(temp,humidity,pressure);
             }
         }
     }

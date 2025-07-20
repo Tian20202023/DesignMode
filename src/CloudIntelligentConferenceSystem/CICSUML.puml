@@ -1,0 +1,303 @@
+@startuml
+class CloudIntelligentConferenceSystem.PerformanceFirstStrategy {
++ void schedule(Meeting)
+}
+
+interface CloudIntelligentConferenceSystem.ComponentFactory {
+~ Notifier createNotifier()
+~ NetManager createNetManager()
+~ UI createUI()
+}
+
+class CloudIntelligentConferenceSystem.Invoker {
+- Stack<Command> commandHistory
++ void executeCommand(Command)
++ void undoLastCommand()
+}
+
+
+class CloudIntelligentConferenceSystem.DesktopNetManager {
+}
+class CloudIntelligentConferenceSystem.CancelMeetingCommand {
+- MeetingSystem meetingSystem
+- Meeting meetingToCancel
++ void execute()
++ void undo()
+}
+
+
+interface CloudIntelligentConferenceSystem.MeetingBuilder {
+~ void createNewMeeting()
+~ void setAgenda(String)
+~ void setTime(String)
+~ void setHost(User)
+~ void addParticipant(User)
+~ Meeting getMeeting()
+}
+
+class CloudIntelligentConferenceSystem.ConcreteMeetingRecord {
+- String basicContent
++ String getContent()
+}
+
+
+class CloudIntelligentConferenceSystem.MeetingSystem {
+- Director director
+- ComponentFactory componentFactory
+- MeetingController meetingController
+- List<Observer> observers
+- SchedulingStrategy schedulingStrategy
+- Invoker invoker
++ void setComponentFactory(ComponentFactory)
++ void setSchedulingStrategy(SchedulingStrategy)
++ void addObserver(Observer)
++ void removeObserver(Observer)
+- void notifyObservers(String)
++ Meeting createMeeting(MeetingBuilder)
++ void startMeeting(Meeting)
++ void endMeeting(Meeting)
++ void executeCommand(Command)
++ void undoLastCommand()
+}
+
+
+class CloudIntelligentConferenceSystem.SummaryDecorator {
++ String getContent()
+}
+
+class CloudIntelligentConferenceSystem.KeywordDecorator {
++ String getContent()
+}
+
+class CloudIntelligentConferenceSystem.DesktopComponentFactory {
++ Notifier createNotifier()
++ UI createUI()
++ NetManager createNetManager()
+}
+
+class CloudIntelligentConferenceSystem.WebUI {
+}
+class CloudIntelligentConferenceSystem.MobileComponentFactory {
++ Notifier createNotifier()
++ UI createUI()
++ NetManager createNetManager()
+}
+
+class CloudIntelligentConferenceSystem.ConcreteMeetingBuilder {
+- String agenda
+- String time
+- User host
+- List<User> participants
++ void createNewMeeting()
++ void setAgenda(String)
++ void setTime(String)
++ void setHost(User)
++ void addParticipant(User)
++ Meeting getMeeting()
+}
+
+
+class CloudIntelligentConferenceSystem.MeetingStatusManager {
+- List<Observer> observers
+- String status
++ void setStatus(String)
++ void addObserver(Observer)
++ void removeObserver(Observer)
++ void notifyObservers(String)
+}
+
+
+class CloudIntelligentConferenceSystem.DesktopNotifier {
+}
+interface CloudIntelligentConferenceSystem.MeetingRecord {
+~ String getContent()
+}
+
+interface CloudIntelligentConferenceSystem.Notifier {
+}
+interface CloudIntelligentConferenceSystem.SchedulingStrategy {
+~ void schedule(Meeting)
+}
+
+interface CloudIntelligentConferenceSystem.Command {
+~ void execute()
+~ void undo()
+}
+
+interface CloudIntelligentConferenceSystem.NetManager {
+}
+class CloudIntelligentConferenceSystem.EnergySavingStrategy {
++ void schedule(Meeting)
+}
+
+class CloudIntelligentConferenceSystem.Director {
+- MeetingBuilder meetingBuilder
++ void setMeetingBuilder(MeetingBuilder)
++ Meeting constructMeeting()
+}
+
+
+class CloudIntelligentConferenceSystem.UIObserver {
+- String uiName
++ void update(String)
+}
+
+
+abstract class CloudIntelligentConferenceSystem.MeetingRecordDecorator {
+# MeetingRecord wrappedRecord
++ String getContent()
+}
+
+
+class CloudIntelligentConferenceSystem.WebNotifier {
+}
+interface CloudIntelligentConferenceSystem.PlatformAPI {
+~ void videoOn()
+~ void audioOff()
+~ void shareScreen()
+~ void sendMessage(String)
+}
+
+class CloudIntelligentConferenceSystem.CreateMeetingCommand {
+- MeetingSystem meetingSystem
+- MeetingBuilder meetingBuilder
+- Meeting createdMeeting
++ void execute()
++ void undo()
+}
+
+
+class CloudIntelligentConferenceSystem.MobileUI {
+}
+class CloudIntelligentConferenceSystem.GeneralMeetingController {
++ void startVideo()
++ void stopAudio()
++ void startScreenShare()
++ void sendMeetingMessage(String)
+}
+
+class CloudIntelligentConferenceSystem.SemanticAnalysisDecorator {
++ String getContent()
+}
+
+class CloudIntelligentConferenceSystem.Meeting {
+- String agenda
+- String time
+- User host
+- List<User> participants
++ String getAgenda()
++ String getTime()
++ User getHost()
++ List<User> getParticipants()
++ String toString()
+}
+
+
+class CloudIntelligentConferenceSystem.DesktopUI {
+}
+class CloudIntelligentConferenceSystem.WebNetManager {
+}
+interface CloudIntelligentConferenceSystem.Subject {
+~ void addObserver(Observer)
+~ void removeObserver(Observer)
+~ void notifyObservers(String)
+}
+
+class CloudIntelligentConferenceSystem.MobileNotifier {
+}
+class CloudIntelligentConferenceSystem.User {
+- String name
++ String getName()
+}
+
+
+class CloudIntelligentConferenceSystem.MobileNetManager {
+}
+abstract class CloudIntelligentConferenceSystem.MeetingController {
+# PlatformAPI platformAPI
++ {abstract}void startVideo()
++ {abstract}void stopAudio()
++ {abstract}void startScreenShare()
++ {abstract}void sendMeetingMessage(String)
++ void setPlatformAPI(PlatformAPI)
+}
+
+
+class CloudIntelligentConferenceSystem.DesktopPlatformAPI {
++ void videoOn()
++ void audioOff()
++ void shareScreen()
++ void sendMessage(String)
+}
+
+class CloudIntelligentConferenceSystem.Main {
++ {static} void main(String[])
+}
+
+class CloudIntelligentConferenceSystem.LoggerObserver {
++ void update(String)
+}
+
+interface CloudIntelligentConferenceSystem.Observer {
+~ void update(String)
+}
+
+interface CloudIntelligentConferenceSystem.UI {
+}
+class CloudIntelligentConferenceSystem.WebPlatformAPI {
++ void videoOn()
++ void audioOff()
++ void shareScreen()
++ void sendMessage(String)
+}
+
+class CloudIntelligentConferenceSystem.WebComponentFactory {
++ Notifier createNotifier()
++ UI createUI()
++ NetManager createNetManager()
+}
+
+class CloudIntelligentConferenceSystem.RemoteObserver {
++ void update(String)
+}
+
+CloudIntelligentConferenceSystem.Director --> CloudIntelligentConferenceSystem.MeetingBuilder
+CloudIntelligentConferenceSystem.MobileComponentFactory ...> CloudIntelligentConferenceSystem.MobileUI
+CloudIntelligentConferenceSystem.MobileComponentFactory ...> CloudIntelligentConferenceSystem.MobileNetManager
+CloudIntelligentConferenceSystem.MobileComponentFactory ...> CloudIntelligentConferenceSystem.MobileNotifier
+CloudIntelligentConferenceSystem.WebComponentFactory ...> CloudIntelligentConferenceSystem.WebUI
+CloudIntelligentConferenceSystem.WebComponentFactory ...> CloudIntelligentConferenceSystem.WebNetManager
+CloudIntelligentConferenceSystem.WebComponentFactory ...> CloudIntelligentConferenceSystem.WebNotifier
+CloudIntelligentConferenceSystem.DesktopComponentFactory ...> CloudIntelligentConferenceSystem.DesktopUI
+CloudIntelligentConferenceSystem.DesktopComponentFactory ...> CloudIntelligentConferenceSystem.DesktopNetManager
+CloudIntelligentConferenceSystem.DesktopComponentFactory ...> CloudIntelligentConferenceSystem.DesktopNotifier
+CloudIntelligentConferenceSystem.SchedulingStrategy <|.. CloudIntelligentConferenceSystem.PerformanceFirstStrategy
+CloudIntelligentConferenceSystem.NetManager <|.. CloudIntelligentConferenceSystem.DesktopNetManager
+CloudIntelligentConferenceSystem.Command <|.. CloudIntelligentConferenceSystem.CancelMeetingCommand
+CloudIntelligentConferenceSystem.MeetingRecord <|.. CloudIntelligentConferenceSystem.ConcreteMeetingRecord
+CloudIntelligentConferenceSystem.MeetingRecordDecorator <|-- CloudIntelligentConferenceSystem.SummaryDecorator
+CloudIntelligentConferenceSystem.MeetingRecordDecorator <|-- CloudIntelligentConferenceSystem.KeywordDecorator
+CloudIntelligentConferenceSystem.ComponentFactory <|.. CloudIntelligentConferenceSystem.DesktopComponentFactory
+CloudIntelligentConferenceSystem.UI <|.. CloudIntelligentConferenceSystem.WebUI
+CloudIntelligentConferenceSystem.ComponentFactory <|.. CloudIntelligentConferenceSystem.MobileComponentFactory
+CloudIntelligentConferenceSystem.MeetingBuilder <|.. CloudIntelligentConferenceSystem.ConcreteMeetingBuilder
+CloudIntelligentConferenceSystem.Subject <|.. CloudIntelligentConferenceSystem.MeetingStatusManager
+CloudIntelligentConferenceSystem.Notifier <|.. CloudIntelligentConferenceSystem.DesktopNotifier
+CloudIntelligentConferenceSystem.SchedulingStrategy <|.. CloudIntelligentConferenceSystem.EnergySavingStrategy
+CloudIntelligentConferenceSystem.Observer <|.. CloudIntelligentConferenceSystem.UIObserver
+CloudIntelligentConferenceSystem.MeetingRecord <|.. CloudIntelligentConferenceSystem.MeetingRecordDecorator
+CloudIntelligentConferenceSystem.Notifier <|.. CloudIntelligentConferenceSystem.WebNotifier
+CloudIntelligentConferenceSystem.Command <|.. CloudIntelligentConferenceSystem.CreateMeetingCommand
+CloudIntelligentConferenceSystem.UI <|.. CloudIntelligentConferenceSystem.MobileUI
+CloudIntelligentConferenceSystem.MeetingController <|-- CloudIntelligentConferenceSystem.GeneralMeetingController
+CloudIntelligentConferenceSystem.MeetingRecordDecorator <|-- CloudIntelligentConferenceSystem.SemanticAnalysisDecorator
+CloudIntelligentConferenceSystem.UI <|.. CloudIntelligentConferenceSystem.DesktopUI
+CloudIntelligentConferenceSystem.NetManager <|.. CloudIntelligentConferenceSystem.WebNetManager
+CloudIntelligentConferenceSystem.Notifier <|.. CloudIntelligentConferenceSystem.MobileNotifier
+CloudIntelligentConferenceSystem.NetManager <|.. CloudIntelligentConferenceSystem.MobileNetManager
+CloudIntelligentConferenceSystem.PlatformAPI <|.. CloudIntelligentConferenceSystem.DesktopPlatformAPI
+CloudIntelligentConferenceSystem.Observer <|.. CloudIntelligentConferenceSystem.LoggerObserver
+CloudIntelligentConferenceSystem.PlatformAPI <|.. CloudIntelligentConferenceSystem.WebPlatformAPI
+CloudIntelligentConferenceSystem.ComponentFactory <|.. CloudIntelligentConferenceSystem.WebComponentFactory
+CloudIntelligentConferenceSystem.Observer <|.. CloudIntelligentConferenceSystem.RemoteObserver
+@enduml
